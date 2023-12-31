@@ -11,6 +11,10 @@ class BinarySearchTree {
     this.root = null;
   }
 
+  // Find & Insert are O(log n) on best and average scenario
+  // Worst case is O(n) - One-sided tree 3 -> 10 -> 15 -> ... -> n
+  // choose another root for the tree to make things more efficient
+
   iterativeInsert(val) {
     const node = new Node(val);
 
