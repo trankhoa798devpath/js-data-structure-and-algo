@@ -30,7 +30,7 @@ class GenericTree {
     return visited;
   }
 
-  // Visit the node first then the entire left and the entire right
+  // Visit the entire left and the entire right then the parent node
   depthFirstSearch_preOrder(parentNode) {
     const visited = [];
 
@@ -45,6 +45,27 @@ class GenericTree {
           visited.push(...this.depthFirstSearch_preOrder(child));
         }
       }
+    }
+
+    return visited;
+  }
+
+  // Visit the node first then the entire left and the entire right
+  depthFirstSearch_postOrder(parentNode) {
+    const visited = [];
+
+    if (!this.root) return results;
+
+    if (!parentNode) {
+      visited.push(...this.depthFirstSearch_postOrder(this.root));
+    } else {
+      if (parentNode.children && parentNode.children.length) {
+        for (const child of parentNode.children) {
+          visited.push(...this.depthFirstSearch_postOrder(child));
+        }
+      }
+
+      visited.push(parentNode.val);
     }
 
     return visited;
@@ -77,3 +98,4 @@ tree2.root.children[0].children = [new TreeNode(3), new TreeNode(8)];
 tree2.root.children[1].children = [new TreeNode(20)];
 
 console.log(tree2.depthFirstSearch_preOrder());
+console.log(tree2.depthFirstSearch_postOrder());
